@@ -5,15 +5,16 @@ function Client () {
     console.info('Client', 'Installing..')
 
     this.renderer = new Renderer(this)
-    
+
     // add canvas to the DOM
     host.appendChild(this.renderer.el);
 
     document.addEventListener('keypress', (e) => { handleKeyPress(e) }, false );
-    document.addEventListener('mousedown', (e) => { }, false)
-    document.addEventListener('mousemove', (e) => {  }, false)
-    document.addEventListener('mouseup', (e) => {  }, false)
-    
+    document.addEventListener('mousedown', (e) => mouseDown(e, this), false)
+    document.addEventListener('mousemove', (e) => { }, false)
+    document.addEventListener('mouseup', (e) => mouseUp(e, this), false)
+
+
     //window.addEventListener('resize', (e) => { this.onResize() }, false)
     window.addEventListener('dragover', (e) => {  })
   }
@@ -38,7 +39,7 @@ function Client () {
   }
 
   this.getPadding = () => {
-    return { x: 60, y: 90 }
+    return { x: 0, y: 0 }
   }
 
   this.getWindowSize = () => {
@@ -57,30 +58,44 @@ function Client () {
 
   this.handleKeyPress = (e) => {
     if (e.key === "q") {
-     
+      alert("hello");
     }
     else if (e.key === "a") {
-     
+
     }
     else if (e.key === "w") {
-     
+
     }
     else if (e.key === "s") {
-     
-    } 
+
+    }
     else if (e.key === "e") {
-     
+
     }
     else if (e.key === "d") {
-     
-    } 
-    else if (e.key === "r") {
-     
+
     }
-    else if (e.key === "f") {
-     
-    } 
+    else if (e.key === "r") {
+
+    }    else if (e.key === "f") {
+
+    }
   }
+  var hold = false
+  function mouseDown(e, client) {
+    hold = true
+    client.renderer.hold = hold
+    buttonPresses(e, client);
+  }
+
+  function mouseUp(e, client){
+    hold = false
+    client.renderer.hold = hold
+    buttonUnpresses(e, client);
+  }
+
+
+
 
   function sizeOffset (a, b) { return { width: a.width - b.width, height: a.height - b.height } }
   function step (v, s) { return Math.round(v / s) * s }

@@ -1,7 +1,10 @@
 /*
- * 
+ *
  */
 'use strict'
+
+this.hold = false
+this.currentKey = 99
 
 function Renderer (client) {
     this.el = document.createElement('canvas')
@@ -14,11 +17,12 @@ function Renderer (client) {
     this.context = this.el.getContext('2d')
     this.showExtras = true
 
+
     this.scale = 1 //window.devicePixelRatio
 
     // params
     this.param1 = 0.05
-    
+
     // handle incoming control message, set values of params, etc.
     this.controlParam1 = (v) => {
         let mv = map(v, 0, 127, 0.08, 4.0)
@@ -26,15 +30,24 @@ function Renderer (client) {
         return mv
     }
 
-    // constants
 
+    // constants
+    const offwhite = "#fffddd"
     const red = "#DD4A22"
     const yellow = "#F3B83C"
     const blue = "#6060A6"
     const rose = "#FFBDB0"
     const rootbeer = "#1f0c07"
+    const black = "#000000"
+    const shadow = "#a2a2a2"
+    const white = "#ffffff"
+    const display = "#5c5c3d"
+    const moreoff = "#ffffcc"
+    const redd = "#ff0000"
+    const orange = "#ff8600"
+    const blue2 = "#0020ff"
 
-    // functions 
+    // functions
     this.start = function () {
         this.update()
     }
@@ -69,61 +82,231 @@ function Renderer (client) {
         this.el.style.width = (_target.width) + 'px'
         this.el.style.height = (_target.height) + 'px'
     }
+
+    this.aButton = function(x, y, colour) {
+      this.context.beginPath();
+      this.context.fillStyle = colour;
+      this.context.fillRect(x, y, 20, 40);
+      this.context.lineStyle = shadow;
+      this.context.lineWidth = 2;
+      this.context.moveTo(x+1, y+40);
+      this.context.lineTo(x+20, y+40);
+      this.context.lineTo(x+20, y+1);
+      this.context.stroke();
+    }
+
+    var isWhite = true
+    var animatedColour = white
+    this.animateKeys = function(x, white){
+      this.currentKey = x
+      if (white == true) {
+        isWhite = true
+        if (this.hold == true) {
+          animatedColour = shadow
+        }
+        if (this.hold == false) {
+          animatedColour = white
+        }
+      }
+      if (white == false) {
+        isWhite = false
+        if (this.hold == true) {
+          animatedColour = shadow
+        }
+        if (this.hold == false) {
+          animatedColour = black
+        }
+      }
+    }
+
+
+
     // ------------------
 
     this.drawKey = function() {
-        var style = { color: "#d3d3d3", thickness: 6.0, strokeLinecap: "round", strokeLinejoin: "round"}
+        var style = { color: offwhite, thickness: 6.0, strokeLinecap: "round", strokeLinejoin: "round"}
         this.setStyle(style)
 
-        // box
+        // outline
+        this.context.strokeStyle = offwhite;
         this.context.beginPath();
-        this.context.moveTo(269.3, 76.4);
-        this.context.lineTo(211.0, 76.4);
-        this.context.bezierCurveTo(203.0, 76.4, 196.5, 70.0, 196.5, 62.0);
-        this.context.lineTo(196.5, 47.6);
-        this.context.bezierCurveTo(196.5, 39.6, 203.0, 33.2, 211.0, 33.2);
-        this.context.lineTo(269.3, 33.2);
-        this.context.bezierCurveTo(277.3, 33.2, 283.8, 39.6, 283.8, 47.6);
-        this.context.lineTo(283.8, 62.0);
-        this.context.bezierCurveTo(283.8, 70.0, 277.3, 76.4, 269.3, 76.4);
+        this.context.moveTo(50, 20);
+        this.context.lineTo(1270, 20);
+        this.context.bezierCurveTo(1270, 20, 1300, 30, 1300, 60);
+        this.context.lineTo(1300, 300);
+        this.context.bezierCurveTo(1300, 300, 1300, 340, 1280, 340);
+        this.context.lineTo(60, 340);
+        this.context.bezierCurveTo(60, 340, 40, 335, 30, 300);
+        this.context.lineTo(30, 60);
+        this.context.bezierCurveTo(30, 60, 30, 20, 50, 20);
         this.context.closePath();
+        this.context.fillStyle = moreoff;
+        this.context.fill();
         this.context.stroke();
 
-        this.context.strokeStyle = yellow
-        // Nuke/Key
+        // speaker
         this.context.beginPath();
-        this.context.moveTo(228.8, 54.5);
-        this.context.bezierCurveTo(228.8, 59.2, 225.0, 63.0, 220.3, 63.0);
-        this.context.bezierCurveTo(215.6, 63.0, 211.8, 59.2, 211.8, 54.5);
-        this.context.bezierCurveTo(211.8, 49.8, 215.6, 46.0, 220.3, 46.0);
-        this.context.bezierCurveTo(225.0, 46.0, 228.8, 49.8, 228.8, 54.5);
-        this.context.closePath();
+        this.context.strokeStyle = shadow;
+        this.context.lineWidth = 3;
+        this.context.moveTo(55, 45);
+        for (var x = 0; x < 28; x++) {
+          this.context.lineTo(255, (x*10)+45);
+          this.context. moveTo(55, ((x+1)*10)+45);
+        }
+        this.context.stroke();
+        this.context.beginPath();
+        this.context.strokeStyle = black;
+        this.context.lineWidth = 3;
+        this.context.strokeRect(55, 35, 200, 290);
+
+        this.context.beginPath();
+        this.context.strokeStyle = black;
+        this.context.lineWidth =2;
+        this.context.moveTo(55, 43);
+        for (var x = 0; x < 28; x++) {
+          this.context.lineTo(255, (x*10)+43);
+          this.context. moveTo(55, ((x+1)*10)+43);
+        }
         this.context.stroke();
 
-        // Nuke/Key/Base
-        this.context.beginPath();
-        this.context.moveTo(228.8, 54.5);
-        this.context.lineTo(268.6, 54.5);
+        //Screen
+        this.context.fillStyle = black;
+        this.context.fillRect(285, 16, 270, 140);
+        this.context.stroke();
+        this.context.fillStyle = display;
+        this.context.fillRect(310, 60, 220, 60);
         this.context.stroke();
 
-        // Nuke/Key/Tooth 2
         this.context.beginPath();
-        this.context.moveTo(260.6, 54.5);
-        this.context.lineTo(260.6, 63.0);
+        this.context.strokeStyle = black;
+        this.context.lineWidth = 1;
+        this.context.moveTo(310, 62);
+        this.context.lineTo(530,62);
+        this.context.stroke();
+        this.context.beginPath();
+        this.context.strokeStyle = white;
+        this.context.lineWidth = 2;
+        this.context.moveTo(285, 20);
+        this.context.lineTo(555,20);
+        this.context.moveTo(285, 24);
+        this.context.lineTo(555,24);
+        this.context.stroke();
+        this.context.beginPath();
+        this.context.strokeStyle = shadow;
+        this.context.lineWidth = 4;
+        this.context.moveTo(286, 30);
+        this.context.lineTo(554,30);
+        this.context.stroke();
+        this.context.beginPath()
+        this.context.lineWidth = 2;
+        this.context.moveTo(286, 150);
+        this.context.lineTo(554, 150);
         this.context.stroke();
 
-        // Nuke/Key/Tooth 1
-        this.context.beginPath();
-        this.context.moveTo(249.6, 54.5);
-        this.context.lineTo(249.6, 63.0);
+        this.context.font = "bold 14px Arial"
+        this.context.fillStyle = shadow;
+        this.context.fillText("CASIO", 370, 50);
+        this.context.stroke();
+        this.context.font = "11px Arial"
+        this.context.fillStyle = shadow;
+        this.context.fillText("VL-TONE", 420, 50);
+        this.context.stroke();
+        this.context.font = "8px Arial"
+        this.context.fillStyle = shadow;
+        this.context.fillText("ELECTRONIC   MUSICAL   INSTRUMENT     VL-1", 335, 140);
         this.context.stroke();
 
-        // Nuke/Key/Fill
+
+        // key bed
         this.context.beginPath();
-        this.context.moveTo(225.4, 47.7);
-        this.context.lineTo(225.4, 61.1);
+        this.context.strokeStyle = shadow;
+        this.context.lineWidth =3;
+        this.context.moveTo(285, 173);
+        this.context.lineTo(1304, 173);
+        this.context.moveTo(288, 173);
+        this.context.lineTo(288, 343);
         this.context.stroke();
+        this.context.lineWidth = 2;
+        this.context.moveTo(307, 173);
+        this.context.lineTo(307, 343);
+        this.context.moveTo(1285, 173);
+        this.context.lineTo(1285, 341);
+        this.context.stroke();
+        this.context.beginPath();
+        this.context.strokeStyle = black;
+        this.context.lineWidth =3;
+        this.context.moveTo(285, 345);
+        this.context.lineTo(285, 170);
+        this.context.lineTo(1305, 170);
+        this.context.stroke();
+
+        // keys
+        this.context.beginPath();
+        this.context.fillStyle = white;
+        var notes = ['G1', 'A1', 'B1', 'C2', 'D2', 'E2', 'F2', 'G2', 'A2', 'B2', 'C3', 'D3', 'E3', 'F3', 'G3', 'A3', 'B3'];
+        for (var x = 0; x < notes.length; x++) {
+          this.context.fillStyle = white;
+          this.context.fillRect(325 + (x*57), 255, 30, 60);
+          if (notes[x].includes("G") || notes[x].includes("A") || notes[x].includes("C") || notes[x].includes("D") || notes[x].includes("F")) {
+            this.context.fillStyle = black;
+            this.context.fillRect(356 + (x*57), 170, 25, 70);
+          }
+          if (x == this.currentKey && isWhite == true){
+            this.context.fillStyle = animatedColour;
+            this.context.fillRect(325 + (x*57), 255, 30, 60);
+          }
+          if (x == this.currentKey && isWhite == false){
+            this.context.fillStyle = animatedColour;
+            this.context.fillRect(356 + (x*57), 170, 25, 70);
+          }
+        }
+        for (var x = 0; x < notes.length; x++) {
+          this.context.strokeStyle = shadow;
+          this.context.lineWidth = 2;
+          var aPoint = 325 + (x*57);
+          this.context.moveTo(aPoint, 315);
+          this.context.lineTo(aPoint + 30, 315);
+          this.context.lineTo(aPoint + 30, 255);
+          if (notes[x].includes("G") || notes[x].includes("A") || notes[x].includes("C") || notes[x].includes("D") || notes[x].includes("F")) {
+            this.context.moveTo((357 + (x*57)), 241);
+            this.context.lineTo((357 + (x*57)) + 25, 241);
+            this.context.lineTo((357 + (x*57)) + 25, 172);
+          }
+          this.context.stroke();
+        }
+
+        // Interface
+        var buttonXs = [[570,redd],[600,redd],[660,white],[690,white],[730,white],[760,white],[800,white],[830,white],[870,white],[900,white],[960,orange],[990,orange],[1040,blue2],[1070,blue2],[1120,rose],[1150,rose]];
+        for (var x  = 0; x < buttonXs.length; x++) {
+          this.context.strokeStyle = shadow
+          this.context.lineWidth = 2
+          this.aButton(buttonXs[x][0], 100, buttonXs[x][1]);
+          this.context.beginPath();
+          this.context.strokeStyle = black
+          this.context.lineWidth = 1
+          this.context.moveTo(buttonXs[x][0] + 5, 120);
+          this.context.lineTo(buttonXs[x][0] + 15, 120);
+          if (x % 2 != 0) {
+            this.context.moveTo(buttonXs[x][0] + 10, 115);
+            this.context.lineTo(buttonXs[x][0] + 10, 125);
+          }
+          this.context.stroke();
+        }
+
+        this.context.font = "11px Arial"
+        this.context.fillStyle = black;
+        this.context.fillText("Waveform", buttonXs[0][0], 157);
+        this.context.fillText("Attack", buttonXs[2][0]+12, 157);
+        this.context.fillText("Decay", buttonXs[4][0]+11, 157);
+        this.context.fillText("Sustain", buttonXs[6][0]+9, 157);
+        this.context.fillText("Release", buttonXs[8][0]+8, 157);
+        this.context.fillText("Vibrato", buttonXs[10][0]+8, 157);
+        this.context.fillText("Tremelo", buttonXs[12][0]+7, 157);
+        this.context.fillText("Tempo", buttonXs[14][0]+11, 157);
+        this.context.stroke();
+
     }
+
 
     this.setStyle = function(style) {
         this.context.strokeStyle = style.color
@@ -147,11 +330,11 @@ function Renderer (client) {
 
         // Dash
         this.context.save()
-        if (style.strokeLineDash) { 
-            this.context.setLineDash(style.strokeLineDash) 
-        } 
-        else { 
-            this.context.setLineDash([]) 
+        if (style.strokeLineDash) {
+            this.context.setLineDash(style.strokeLineDash)
+        }
+        else {
+            this.context.setLineDash([])
         }
         this.context.stroke(p)
         this.context.restore()
@@ -171,7 +354,7 @@ function Renderer (client) {
     function rotate(p,a,orgin) {
         let s = Math.sin(a)
         let c = Math.cos(a)
-        
+
         // translate to orgin
         p = p.minus(orgin)
 
