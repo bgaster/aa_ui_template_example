@@ -1,3 +1,13 @@
+var waveform = 0
+var attack = 0
+var decay = 0
+var sustain = 0
+var release = 0
+var vibrato = 0
+var tremelo = 0
+var tempo = 0
+
+
 buttonPresses = function(e, client) {
   var params = [578,608,668,698,738,768,808,838,878,908,968,998,1048,1078,1128,1158];
   var notes = ['G1', 'A1', 'B1', 'C2', 'D2', 'E2', 'F2', 'G2', 'A2', 'B2', 'C3', 'D3', 'E3', 'F3', 'G3', 'A3', 'B3'];
@@ -12,52 +22,116 @@ buttonPresses = function(e, client) {
     }
   }
   if (e.clientX >= params[0]  && e.clientY >= 108  && e.clientX <= params[0] + 20  && e.clientY <= 149) {
-    console.log("Pressed1")
+    if (waveform > 0) {
+      waveform = waveform - 1
+      console.log("- Waveform")
+      console.log(waveform)
+    }
   }
   if (e.clientX >= params[1] && e.clientY >= 108  && e.clientX <= params[1] + 20 && e.clientY <= 149) {
-    console.log("Pressed2")
+    if (waveform < 9) {
+      waveform = waveform + 1
+      console.log("+ Waveform")
+      console.log(waveform)
+    }
   }
   if (e.clientX >= params[2] && e.clientY >= 108  && e.clientX <= params[2] + 20 && e.clientY <= 149) {
-    console.log("Pressed3")
+    if (attack > 0) {
+      attack = attack - 1
+      console.log("- Attack")
+      console.log(attack)
+    }
   }
   if (e.clientX >= params[3] && e.clientY >= 108 && e.clientX <= params[3] + 20 && e.clientY <= 149) {
-    console.log("Pressed4")
+    if (attack < 9) {
+      attack = attack + 1
+      console.log("+ Attack")
+      console.log(attack)
+    }
   }
   if (e.clientX >= params[4] && e.clientY >= 108 && e.clientX <= params[4] + 20 && e.clientY <= 149) {
-    console.log("Pressed5")
+    if (decay > 0) {
+      decay = decay - 1
+      console.log("- Decay")
+      console.log(decay)
+    }
   }
   if (e.clientX >= params[5] && e.clientY >= 108 && e.clientX <= params[5] + 20 && e.clientY <= 149) {
-    console.log("Pressed6")
+    if (decay < 9) {
+      decay = decay + 1
+      console.log("+ Decay")
+      console.log(decay)
+    }
   }
   if (e.clientX >= params[6] && e.clientY >= 108 && e.clientX <= params[6] + 20 && e.clientY <= 149) {
-    console.log("Pressed7")
+    if (sustain > 0) {
+      sustain = sustain - 1
+      console.log("- Sustain")
+      console.log(sustain)
+    }
   }
   if (e.clientX >= params[7] && e.clientY >= 108 && e.clientX <= params[7] + 20 && e.clientY <= 149) {
-    console.log("Pressed8")
+    if (sustain < 9) {
+      sustain = sustain + 1
+      console.log("+ Sustain")
+      console.log(sustain)
+    }
   }
   if (e.clientX >= params[8] && e.clientY >= 108 && e.clientX <= params[8] + 20 && e.clientY <= 149) {
-    console.log("Pressed9")
+    if (release > 0) {
+      release = release - 1
+      console.log("- Release")
+      console.log(release)
+    }
   }
   if (e.clientX >= params[9] && e.clientY >= 108 && e.clientX <= params[9] + 20 && e.clientY <= 149) {
-    console.log("Pressed10")
+    if (release < 9) {
+      release = release + 1
+      console.log("+ Release")
+      console.log(release)
+    }
   }
   if (e.clientX >= params[10] && e.clientY >= 108 && e.clientX <= params[10] + 20 && e.clientY <= 149) {
-    console.log("Pressed11")
+    if (vibrato > 0) {
+      vibrato = vibrato - 1
+      console.log("- Vibrato")
+      console.log(vibrato)
+    }
   }
   if (e.clientX >= params[11] && e.clientY >= 108 && e.clientX <= params[11] + 20 && e.clientY <= 149) {
-    console.log("Pressed12")
+    if (vibrato < 9) {
+      vibrato = vibrato + 1
+      console.log("+ Vibrato")
+      console.log(vibrato)
+    }
   }
   if (e.clientX >= params[12] && e.clientY >= 108 && e.clientX <= params[12] + 20 && e.clientY <= 149) {
-    console.log("Pressed13")
+    if (tremelo > 0) {
+      tremelo = tremelo - 1
+        console.log("- Tremelo")
+      console.log(tremelo)
+    }
   }
   if (e.clientX >= params[13] && e.clientY >= 108 && e.clientX <= params[13] + 20 && e.clientY <= 149) {
-    console.log("Pressed14")
+    if (tremelo < 9) {
+      tremelo = tremelo + 1
+      console.log("+ Tremelo")
+      console.log(tremelo)
+    }
   }
   if (e.clientX >= params[14] && e.clientY >= 108 && e.clientX <= params[14] + 20 && e.clientY <= 149) {
-    console.log("Pressed15")
+    if (tempo > 0) {
+      tempo = tempo - 1
+      console.log("- Tempo")
+      console.log(tempo)
+    }
   }
   if (e.clientX >= params[15] && e.clientY >= 108 && e.clientX <= params[15] + 20 && e.clientY <= 149) {
-    console.log("Pressed16")
+    if (tempo < 19) {
+      tempo = tempo + 1
+      console.log("+ Tempo")
+      console.log(tempo)
+    }
   }
 }
 
