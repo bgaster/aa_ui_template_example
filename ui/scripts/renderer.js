@@ -6,6 +6,7 @@
 this.hold = false
 this.currentKey = 99
 
+
 function Renderer (client) {
     this.el = document.createElement('canvas')
     this.el.id = 'guide'
@@ -29,7 +30,6 @@ function Renderer (client) {
         this.param1 = mv
         return mv
     }
-
 
     // constants
     const offwhite = "#fffddd"
@@ -95,6 +95,7 @@ function Renderer (client) {
       this.context.stroke();
     }
 
+    // Animate keys
     var isWhite = true
     var animatedColour = white
     this.animateKeys = function(x, white){
@@ -119,6 +120,43 @@ function Renderer (client) {
       }
     }
 
+
+    // Set params
+    this.waveform = 0
+    this.attack = 0
+    this.decay = 0
+    this.sustain = 0
+    this.release = 0
+    this.vibrato = 0
+    this.tremelo = 0
+    this.tempo = 0
+
+    this.setParams = function(param, value) {
+      if (param == 0) {
+        this.waveform = value
+      }
+      if (param == 1) {
+        this.attack = value
+      }
+      if (param == 2) {
+        this.decay = value
+      }
+      if (param == 3) {
+        this.sustain = value
+      }
+      if (param == 4) {
+        this.release = value
+      }
+      if (param == 5) {
+        this.vibrato = value
+      }
+      if (param == 6) {
+        this.tremelo = value
+      }
+      if (param == 7) {
+        this.tempo = value
+      }
+    }
 
 
     // ------------------
@@ -293,6 +331,7 @@ function Renderer (client) {
           this.context.stroke();
         }
 
+        // Interface text
         this.context.font = "11px Arial"
         this.context.fillStyle = black;
         this.context.fillText("Waveform", buttonXs[0][0], 157);
@@ -305,6 +344,17 @@ function Renderer (client) {
         this.context.fillText("Tempo", buttonXs[14][0]+11, 157);
         this.context.stroke();
 
+        // Screen Text
+        this.context.font = "40px Arial"
+        this.context.fillStyle = black;
+        this.context.fillText(this.waveform, 320, 108)
+        this.context.fillText(this.attack, 350, 108)
+        this.context.fillText(this.decay, 380, 108)
+        this.context.fillText(this.sustain, 410, 108)
+        this.context.fillText(this.release, 440, 108)
+        this.context.fillText(this.vibrato, 470, 108)
+        this.context.fillText(this.tremelo, 500, 108)
+        this.context.stroke();
     }
 
 
