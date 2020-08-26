@@ -91,7 +91,7 @@ function Client () {
   function mouseUp(e, client){
     hold = false
     client.renderer.hold = hold
-    buttonUnpresses(e, client);
+    buttonUnpresses(client);
   }
 
 

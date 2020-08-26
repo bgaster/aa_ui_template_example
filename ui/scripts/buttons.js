@@ -7,18 +7,30 @@ var vibrato = 0
 var tremelo = 0
 var tempo = 0
 
+var params = [578,608,668,698,738,768,808,838,878,908,968,998,1048,1078,1128,1158];
+var notes = ['G1', 'A1', 'B1', 'C2', 'D2', 'E2', 'F2', 'G2', 'A2', 'B2', 'C3', 'D3', 'E3', 'F3', 'G3', 'A3', 'B3'];
+
+currentNote = 0
+isWhite = true
+noteOnRecieved = false
 
 buttonPresses = function(e, client) {
-  var params = [578,608,668,698,738,768,808,838,878,908,968,998,1048,1078,1128,1158];
-  var notes = ['G1', 'A1', 'B1', 'C2', 'D2', 'E2', 'F2', 'G2', 'A2', 'B2', 'C3', 'D3', 'E3', 'F3', 'G3', 'A3', 'B3'];
   for (var x = 0; x < notes.length; x++) {
     if (e.clientX >= 333 + (x*57) && e.clientY >= 263 && e.clientX <= 363 + (x*57) && e.clientY <= 323)  {
-      console.log(notes[x]);
+      console.log(notes[x] + " on");
+      currentNote = x
+      isWhite = true
+      noteOnRecieved = true
       client.renderer.animateKeys(x, true)
     }
     if (e.clientX >= 364 + (x*57) && e.clientY >= 178 && e.clientX <= 389 + (x*57) && e.clientY <= 248) {
-      console.log(notes[x]+ "#")
-      client.renderer.animateKeys(x, false)
+      if (notes[x].includes("B") == false && notes[x].includes("E") == false) {
+        console.log(notes[x]+ "# on")
+        currentNote = x
+        isWhite = false
+        noteOnRecieved = true
+        client.renderer.animateKeys(x, false)
+      }
     }
   }
   if (e.clientX >= params[0]  && e.clientY >= 108  && e.clientX <= params[0] + 20  && e.clientY <= 149) {
@@ -135,6 +147,16 @@ buttonPresses = function(e, client) {
   }
 }
 
-buttonUnpresses = function(x, client){
-  client.renderer.animateKeys(99, true)
+buttonUnpresses = function(client){
+  if (noteOnRecieved == true) {
+    if (isWhite == true) {
+      console.log(notes[currentNote] + " off");
+      client.renderer.animateKeys(currentNote, true)
+    }
+    else {
+      console.log(notes[currentNote] + "# off");
+      client.renderer.animateKeys(currentNote, false)
+    }
+    noteOnRecieved == false
+  }
 }
