@@ -39,6 +39,7 @@ buttonPresses = function(e, client) {
       console.log("- Waveform")
       client.renderer.setParams(0, waveform)
     }
+    noteOnRecieved = false
   }
   if (e.clientX >= params[1] && e.clientY >= 108  && e.clientX <= params[1] + 20 && e.clientY <= 149) {
     if (waveform < 9) {
@@ -46,6 +47,7 @@ buttonPresses = function(e, client) {
       console.log("+ Waveform")
       client.renderer.setParams(0, waveform)
     }
+    noteOnRecieved = false
   }
   if (e.clientX >= params[2] && e.clientY >= 108  && e.clientX <= params[2] + 20 && e.clientY <= 149) {
     if (attack > 0) {
@@ -53,6 +55,7 @@ buttonPresses = function(e, client) {
       console.log("- Attack")
       client.renderer.setParams(1, attack)
     }
+    noteOnRecieved = false
   }
   if (e.clientX >= params[3] && e.clientY >= 108 && e.clientX <= params[3] + 20 && e.clientY <= 149) {
     if (attack < 9) {
@@ -60,6 +63,7 @@ buttonPresses = function(e, client) {
       console.log("+ Attack")
       client.renderer.setParams(1, attack)
     }
+    noteOnRecieved = false
   }
   if (e.clientX >= params[4] && e.clientY >= 108 && e.clientX <= params[4] + 20 && e.clientY <= 149) {
     if (decay > 0) {
@@ -67,6 +71,7 @@ buttonPresses = function(e, client) {
       console.log("- Decay")
       client.renderer.setParams(2, decay)
     }
+    noteOnRecieved = false
   }
   if (e.clientX >= params[5] && e.clientY >= 108 && e.clientX <= params[5] + 20 && e.clientY <= 149) {
     if (decay < 9) {
@@ -74,6 +79,7 @@ buttonPresses = function(e, client) {
       console.log("+ Decay")
       client.renderer.setParams(2, decay)
     }
+    noteOnRecieved = false
   }
   if (e.clientX >= params[6] && e.clientY >= 108 && e.clientX <= params[6] + 20 && e.clientY <= 149) {
     if (sustain > 0) {
@@ -81,6 +87,7 @@ buttonPresses = function(e, client) {
       console.log("- Sustain")
       client.renderer.setParams(3, sustain)
     }
+    noteOnRecieved = false
   }
   if (e.clientX >= params[7] && e.clientY >= 108 && e.clientX <= params[7] + 20 && e.clientY <= 149) {
     if (sustain < 9) {
@@ -88,6 +95,7 @@ buttonPresses = function(e, client) {
       console.log("+ Sustain")
       client.renderer.setParams(3, sustain)
     }
+    noteOnRecieved = false
   }
   if (e.clientX >= params[8] && e.clientY >= 108 && e.clientX <= params[8] + 20 && e.clientY <= 149) {
     if (release > 0) {
@@ -95,6 +103,7 @@ buttonPresses = function(e, client) {
       console.log("- Release")
       client.renderer.setParams(4, release)
     }
+    noteOnRecieved = false
   }
   if (e.clientX >= params[9] && e.clientY >= 108 && e.clientX <= params[9] + 20 && e.clientY <= 149) {
     if (release < 9) {
@@ -102,6 +111,7 @@ buttonPresses = function(e, client) {
       console.log("+ Release")
       client.renderer.setParams(4, release)
     }
+    noteOnRecieved = false
   }
   if (e.clientX >= params[10] && e.clientY >= 108 && e.clientX <= params[10] + 20 && e.clientY <= 149) {
     if (vibrato > 0) {
@@ -109,6 +119,7 @@ buttonPresses = function(e, client) {
       console.log("- Vibrato")
       client.renderer.setParams(5, vibrato)
     }
+    noteOnRecieved = false
   }
   if (e.clientX >= params[11] && e.clientY >= 108 && e.clientX <= params[11] + 20 && e.clientY <= 149) {
     if (vibrato < 9) {
@@ -116,6 +127,7 @@ buttonPresses = function(e, client) {
       console.log("+ Vibrato")
       client.renderer.setParams(5, vibrato)
     }
+    noteOnRecieved = false
   }
   if (e.clientX >= params[12] && e.clientY >= 108 && e.clientX <= params[12] + 20 && e.clientY <= 149) {
     if (tremelo > 0) {
@@ -123,6 +135,7 @@ buttonPresses = function(e, client) {
       console.log("- Tremelo")
       client.renderer.setParams(6, tremelo)
     }
+    noteOnRecieved = false
   }
   if (e.clientX >= params[13] && e.clientY >= 108 && e.clientX <= params[13] + 20 && e.clientY <= 149) {
     if (tremelo < 9) {
@@ -130,6 +143,7 @@ buttonPresses = function(e, client) {
       console.log("+ Tremelo")
       client.renderer.setParams(6, tremelo)
     }
+    noteOnRecieved = false
   }
   if (e.clientX >= params[14] && e.clientY >= 108 && e.clientX <= params[14] + 20 && e.clientY <= 149) {
     if (tempo > 0) {
@@ -137,6 +151,7 @@ buttonPresses = function(e, client) {
       console.log("- Tempo")
       client.renderer.setParams(7, tempo)
     }
+    noteOnRecieved = false
   }
   if (e.clientX >= params[15] && e.clientY >= 108 && e.clientX <= params[15] + 20 && e.clientY <= 149) {
     if (tempo < 19) {
@@ -144,6 +159,7 @@ buttonPresses = function(e, client) {
       console.log("+ Tempo")
       client.renderer.setParams(7, tempo)
     }
+    noteOnRecieved = false
   }
 }
 
@@ -157,6 +173,6 @@ buttonUnpresses = function(client){
       console.log(notes[currentNote] + "# off");
       client.renderer.animateKeys(currentNote, false)
     }
-    noteOnRecieved == false
   }
+  noteOnRecieved == false
 }
