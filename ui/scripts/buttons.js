@@ -1,8 +1,8 @@
 var waveform = 0
 var attack = 0
-var decay = 0
-var sustain = 0
-var release = 0
+var decay = 1
+var sustain = 2
+var release = 1
 var vibrato = 0
 var tremelo = 0
 var tempo = 0
@@ -159,6 +159,95 @@ buttonPresses = function(e, client) {
       console.log("+ Tempo")
       client.renderer.setParams(7, tempo)
     }
+    noteOnRecieved = false
+  }
+  if (e.clientX >= 593 && e.clientY >= 53 && e.clientX <= 633 && e.clientY <= 73) {
+    console.log("Piano button pressed")
+    waveform = 0
+    client.renderer.setParams(0, waveform)
+    attack = 0
+    client.renderer.setParams(1, attack)
+    decay = 1
+    client.renderer.setParams(2, decay)
+    sustain = 2
+    client.renderer.setParams(3, sustain)
+    release = 1
+    client.renderer.setParams(4, release)
+    vibrato = 0
+    client.renderer.setParams(5, vibrato)
+    tremelo = 0
+    client.renderer.setParams(6, tremelo)
+    noteOnRecieved = false
+  }
+  if (e.clientX >= 663 && e.clientY >= 53 && e.clientX <= 703 && e.clientY <= 73) {
+    console.log("Fantasy button pressed")
+    waveform = 1
+    client.renderer.setParams(0, waveform)
+    attack = 0
+    client.renderer.setParams(1, attack)
+    decay = 0
+    client.renderer.setParams(2, decay)
+    sustain = 7
+    client.renderer.setParams(3, sustain)
+    release = 5
+    client.renderer.setParams(4, release)
+    vibrato = 9
+    client.renderer.setParams(5, vibrato)
+    tremelo = 0
+    client.renderer.setParams(6, tremelo)
+    noteOnRecieved = false
+  }
+  if (e.clientX >= 733 && e.clientY >= 53 && e.clientX <= 773 && e.clientY <= 73) {
+    console.log("Violin button pressed")
+    waveform = 2
+    client.renderer.setParams(0, waveform)
+    attack = 1
+    client.renderer.setParams(1, attack)
+    decay = 0
+    client.renderer.setParams(2, decay)
+    sustain = 7
+    client.renderer.setParams(3, sustain)
+    release = 1
+    client.renderer.setParams(4, release)
+    vibrato = 5
+    client.renderer.setParams(5, vibrato)
+    tremelo = 0
+    client.renderer.setParams(6, tremelo)
+    noteOnRecieved = false
+  }
+  if (e.clientX >= 803 && e.clientY >= 53 && e.clientX <= 843 && e.clientY <= 73) {
+    console.log("Flute button pressed")
+    waveform = 3
+    client.renderer.setParams(0, waveform)
+    attack = 1
+    client.renderer.setParams(1, attack)
+    decay = 0
+    client.renderer.setParams(2, decay)
+    sustain = 7
+    client.renderer.setParams(3, sustain)
+    release = 1
+    client.renderer.setParams(4, release)
+    vibrato = 3
+    client.renderer.setParams(5, vibrato)
+    tremelo = 0
+    client.renderer.setParams(6, tremelo)
+    noteOnRecieved = false
+  }
+  if (e.clientX >= 873 && e.clientY >= 53 && e.clientX <= 913 && e.clientY <= 73) {
+    console.log("Guitar button pressed")
+    client.renderer.setParams(0, waveform)
+    attack = 4
+    client.renderer.setParams(1, attack)
+    decay = 1
+    client.renderer.setParams(2, decay)
+    sustain = 0
+    client.renderer.setParams(3, sustain)
+    release = 7
+    client.renderer.setParams(4, release)
+    vibrato = 0
+    client.renderer.setParams(5, vibrato)
+    tremelo = 0
+    client.renderer.setParams(6, tremelo)
     noteOnRecieved = false
   }
 }
