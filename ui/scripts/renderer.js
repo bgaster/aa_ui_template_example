@@ -4,7 +4,7 @@
 'use strict'
 
 this.hold = false
-this.currentKey = 99
+this.currentKey = 0
 
 
 function Renderer (client) {
@@ -98,9 +98,9 @@ function Renderer (client) {
     // Animate keys
     var isWhite = true
     var animatedColour = white
-    this.animateKeys = function(x, white){
+    this.animateKeys = function(x, aWhite){
       this.currentKey = x
-      if (white == true) {
+      if (aWhite == true) {
         isWhite = true
         if (this.hold == true) {
           animatedColour = shadow
@@ -109,7 +109,7 @@ function Renderer (client) {
           animatedColour = white
         }
       }
-      if (white == false) {
+      if (aWhite == false) {
         isWhite = false
         if (this.hold == true) {
           animatedColour = shadow
