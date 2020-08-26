@@ -40,6 +40,7 @@ function Renderer (client) {
     const rootbeer = "#1f0c07"
     const black = "#000000"
     const shadow = "#a2a2a2"
+    const shadower = "#626262"
     const white = "#ffffff"
     const display = "#5c5c3d"
     const moreoff = "#ffffcc"
@@ -124,9 +125,9 @@ function Renderer (client) {
     // Set params
     this.waveform = 0
     this.attack = 0
-    this.decay = 0
-    this.sustain = 0
-    this.release = 0
+    this.decay = 1
+    this.sustain = 2
+    this.release = 1
     this.vibrato = 0
     this.tremelo = 0
     this.tempo = 0
@@ -331,6 +332,19 @@ function Renderer (client) {
           this.context.stroke();
         }
 
+        this.context.beginPath();
+        this.context.fillStyle = shadow;
+        this.context.strokeStyle = shadower
+        this.context.lineWidth = 2;
+        for (var x  = 0; x <5; x++) {
+          this.context.fillRect(585 + 70*x, 45, 40, 20);
+          this.context.moveTo(586+70*x, 45+20);
+          this.context.lineTo(625+70*x, 45+20);
+          this.context.lineTo(625+70*x, 45+1);
+          this.context.stroke();
+        }
+
+
         // Interface text
         this.context.font = "11px Arial"
         this.context.fillStyle = black;
@@ -342,7 +356,14 @@ function Renderer (client) {
         this.context.fillText("Vibrato", buttonXs[10][0]+8, 157);
         this.context.fillText("Tremelo", buttonXs[12][0]+7, 157);
         this.context.fillText("Tempo", buttonXs[14][0]+11, 157);
+        this.context.fillText("Piano", 593, 80);
+        this.context.fillText("Fantasy", 656, 80);
+        this.context.fillText("Violin", 732, 80);
+        this.context.fillText("Flute", 803, 80);
+        this.context.fillText("Guitar", 871, 80);
         this.context.stroke();
+
+
 
         // Screen Text
         this.context.font = "40px Arial"
