@@ -131,6 +131,7 @@ function Renderer (client) {
     this.vibrato = 0
     this.tremelo = 0
     this.tempo = 0
+    this.octave = 1
 
     this.setParams = function(param, value) {
       if (param == 0) {
@@ -156,6 +157,9 @@ function Renderer (client) {
       }
       if (param == 7) {
         this.tempo = value
+      }
+      if (param == 8) {
+        this.octave = octave
       }
     }
 
@@ -344,6 +348,24 @@ function Renderer (client) {
           this.context.stroke();
         }
 
+        this.context.beginPath()
+        this.context.fillRect(1020, 45, 40, 20);
+        this.context.moveTo(1020, 45+20);
+        this.context.lineTo(1060, 45+20);
+        this.context.lineTo(1060, 45+1);
+        this.context.fillRect(1080, 45, 40, 20);
+        this.context.moveTo(1080, 45+20);
+        this.context.lineTo(1120, 45+20);
+        this.context.lineTo(1120, 45+1);
+        this.context.stroke();
+        this.context.beginPath();
+        this.context.moveTo(1020 + 15, 55);
+        this.context.lineTo(1020 + 25, 55);
+        this.context.moveTo(1085 + 15, 50);
+        this.context.lineTo(1085 + 15, 60);
+        this.context.moveTo(1080 + 15, 55);
+        this.context.lineTo(1080 + 25, 55);
+
 
         // Interface text
         this.context.font = "11px Arial"
@@ -356,11 +378,13 @@ function Renderer (client) {
         this.context.fillText("Vibrato", buttonXs[10][0]+8, 157);
         this.context.fillText("Tremelo", buttonXs[12][0]+7, 157);
         this.context.fillText("Tempo", buttonXs[14][0]+11, 157);
+        this.context.fillText("Volume", 1217, 157)
         this.context.fillText("Piano", 593, 80);
         this.context.fillText("Fantasy", 656, 80);
         this.context.fillText("Violin", 732, 80);
         this.context.fillText("Flute", 803, 80);
         this.context.fillText("Guitar", 871, 80);
+        this.context.fillText("Octave", 1052, 80);
         this.context.stroke();
 
 
@@ -376,6 +400,29 @@ function Renderer (client) {
         this.context.fillText(this.vibrato, 470, 108)
         this.context.fillText(this.tremelo, 500, 108)
         this.context.stroke();
+
+        // Volume slider
+        this.context.beginPath();
+        this.context.lineWidth = 7
+        this.context.strokeStyle = black
+        this.context.moveTo(1235, 138);
+        this.context.lineTo(1235, 44);
+        this.context.stroke();
+
+        this.context.beginPath()
+        this.context.fillStyle = shadow
+        this.context.fillRect(1225, 54, 20, 30)
+        this.context.lineWidth = 1
+        this.context.strokeStyle = black
+        this.context.moveTo(1225, 54 + 15)
+        this.context.lineTo(1245, 54 + 15)
+        this.context.moveTo(1225, 54 + 10)
+        this.context.lineTo(1245, 54 + 10)
+        this.context.moveTo(1225, 54 + 20)
+        this.context.lineTo(1245, 54 + 20)
+        this.context.stroke()
+
+
     }
 
 
