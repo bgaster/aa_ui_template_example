@@ -19,6 +19,7 @@ var release = 1
 var vibrato = 0
 var tremelo = 0
 var tempo = 0
+var octave = 1
 var params = [578,608,668,698,738,768,808,838,878,908,968,998,1048,1078,1128,1158];
 var notes = ['G1', 'A1', 'B1', 'C2', 'D2', 'E2', 'F2', 'G2', 'A2', 'B2', 'C3', 'D3', 'E3', 'F3', 'G3', 'A3', 'B3'];
 var midiG1 = 31
@@ -261,6 +262,24 @@ buttonPresses = function(e, client) {
     client.renderer.setParams(6, tremelo)
     noteOnRecieved = false
   }
+  if (e.clientX >= 1028 && e.clientY >= 53 && e.clientX <= 1028 + 40 && e.clientY <= 53 + 20) {
+    if (octave > 0) {
+      octave = octave - 1
+      console.log("- Octave")
+      console.log(octave)
+      client.renderer.setParams(8, octave)
+    }
+    noteOnRecieved = false
+  }
+  if (e.clientX >= 1088 && e.clientY >= 53 && e.clientX <= 1088 + 40 && e.clientY <= 53 + 20) {
+    if (octave < 2) {
+      octave = octave + 1
+      console.log("+ Octave")
+      console.log(octave)
+      client.renderer.setParams(8, octave)
+    }
+    noteOnRecieved = false
+  }
 }
 buttonUnpresses = function(client){
   if (noteOnRecieved == true) {
@@ -454,6 +473,7 @@ function Renderer (client) {
     this.vibrato = 0
     this.tremelo = 0
     this.tempo = 0
+    this.octave = 1
     this.setParams = function(param, value) {
       if (param == 0) {
         this.waveform = value
@@ -478,6 +498,9 @@ function Renderer (client) {
       }
       if (param == 7) {
         this.tempo = value
+      }
+      if (param == 8) {
+        this.octave = octave
       }
     }
     this.drawKey = function() {
@@ -644,6 +667,23 @@ function Renderer (client) {
           this.context.lineTo(625+70*x, 45+1);
           this.context.stroke();
         }
+        this.context.beginPath()
+        this.context.fillRect(1020, 45, 40, 20);
+        this.context.moveTo(1020, 45+20);
+        this.context.lineTo(1060, 45+20);
+        this.context.lineTo(1060, 45+1);
+        this.context.fillRect(1080, 45, 40, 20);
+        this.context.moveTo(1080, 45+20);
+        this.context.lineTo(1120, 45+20);
+        this.context.lineTo(1120, 45+1);
+        this.context.stroke();
+        this.context.beginPath();
+        this.context.moveTo(1020 + 15, 55);
+        this.context.lineTo(1020 + 25, 55);
+        this.context.moveTo(1085 + 15, 50);
+        this.context.lineTo(1085 + 15, 60);
+        this.context.moveTo(1080 + 15, 55);
+        this.context.lineTo(1080 + 25, 55);
         this.context.font = "11px Arial"
         this.context.fillStyle = black;
         this.context.fillText("Waveform", buttonXs[0][0], 157);
@@ -654,11 +694,13 @@ function Renderer (client) {
         this.context.fillText("Vibrato", buttonXs[10][0]+8, 157);
         this.context.fillText("Tremelo", buttonXs[12][0]+7, 157);
         this.context.fillText("Tempo", buttonXs[14][0]+11, 157);
+        this.context.fillText("Volume", 1217, 157)
         this.context.fillText("Piano", 593, 80);
         this.context.fillText("Fantasy", 656, 80);
         this.context.fillText("Violin", 732, 80);
         this.context.fillText("Flute", 803, 80);
         this.context.fillText("Guitar", 871, 80);
+        this.context.fillText("Octave", 1052, 80);
         this.context.stroke();
         this.context.font = "40px Arial"
         this.context.fillStyle = black;
@@ -670,6 +712,24 @@ function Renderer (client) {
         this.context.fillText(this.vibrato, 470, 108)
         this.context.fillText(this.tremelo, 500, 108)
         this.context.stroke();
+        this.context.beginPath();
+        this.context.lineWidth = 7
+        this.context.strokeStyle = black
+        this.context.moveTo(1235, 138);
+        this.context.lineTo(1235, 44);
+        this.context.stroke();
+        this.context.beginPath()
+        this.context.fillStyle = shadow
+        this.context.fillRect(1225, 54, 20, 30)
+        this.context.lineWidth = 1
+        this.context.strokeStyle = black
+        this.context.moveTo(1225, 54 + 15)
+        this.context.lineTo(1245, 54 + 15)
+        this.context.moveTo(1225, 54 + 10)
+        this.context.lineTo(1245, 54 + 10)
+        this.context.moveTo(1225, 54 + 20)
+        this.context.lineTo(1245, 54 + 20)
+        this.context.stroke()
     }
     this.setStyle = function(style) {
         this.context.strokeStyle = style.color

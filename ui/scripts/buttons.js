@@ -6,6 +6,7 @@ var release = 1
 var vibrato = 0
 var tremelo = 0
 var tempo = 0
+var octave = 1
 
 var params = [578,608,668,698,738,768,808,838,878,908,968,998,1048,1078,1128,1158];
 var notes = ['G1', 'A1', 'B1', 'C2', 'D2', 'E2', 'F2', 'G2', 'A2', 'B2', 'C3', 'D3', 'E3', 'F3', 'G3', 'A3', 'B3'];
@@ -252,6 +253,24 @@ buttonPresses = function(e, client) {
     client.renderer.setParams(5, vibrato)
     tremelo = 0
     client.renderer.setParams(6, tremelo)
+    noteOnRecieved = false
+  }
+  if (e.clientX >= 1028 && e.clientY >= 53 && e.clientX <= 1028 + 40 && e.clientY <= 53 + 20) {
+    if (octave > 0) {
+      octave = octave - 1
+      console.log("- Octave")
+      console.log(octave)
+      client.renderer.setParams(8, octave)
+    }
+    noteOnRecieved = false
+  }
+  if (e.clientX >= 1088 && e.clientY >= 53 && e.clientX <= 1088 + 40 && e.clientY <= 53 + 20) {
+    if (octave < 2) {
+      octave = octave + 1
+      console.log("+ Octave")
+      console.log(octave)
+      client.renderer.setParams(8, octave)
+    }
     noteOnRecieved = false
   }
 }
