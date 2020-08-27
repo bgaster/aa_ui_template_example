@@ -10,6 +10,8 @@ var tempo = 0
 var params = [578,608,668,698,738,768,808,838,878,908,968,998,1048,1078,1128,1158];
 var notes = ['G1', 'A1', 'B1', 'C2', 'D2', 'E2', 'F2', 'G2', 'A2', 'B2', 'C3', 'D3', 'E3', 'F3', 'G3', 'A3', 'B3'];
 
+var midiG1 = 31
+
 currentNote = 0
 isWhite = true
 noteOnRecieved = false
@@ -17,7 +19,8 @@ noteOnRecieved = false
 buttonPresses = function(e, client) {
   for (var x = 0; x < notes.length; x++) {
     if (e.clientX >= 333 + (x*57) && e.clientY >= 263 && e.clientX <= 363 + (x*57) && e.clientY <= 323)  {
-      console.log(notes[x] + " on");
+      //console.log(notes[x] + " on");
+      sendMsg(6, 0, [x + midiG1, 127, 0])
       currentNote = x
       isWhite = true
       noteOnRecieved = true
@@ -25,7 +28,8 @@ buttonPresses = function(e, client) {
     }
     if (e.clientX >= 364 + (x*57) && e.clientY >= 178 && e.clientX <= 389 + (x*57) && e.clientY <= 248) {
       if (notes[x].includes("B") == false && notes[x].includes("E") == false) {
-        console.log(notes[x]+ "# on")
+        //console.log(notes[x]+ "# on")
+        sendMsg(6, 0, [x + midiG1, 127, 0])
         currentNote = x
         isWhite = false
         noteOnRecieved = true
@@ -255,13 +259,14 @@ buttonPresses = function(e, client) {
 buttonUnpresses = function(client){
   if (noteOnRecieved == true) {
     if (isWhite == true) {
-      console.log(notes[currentNote] + " off");
+      //console.log(notes[currentNote] + " off");
       client.renderer.animateKeys(currentNote, true)
     }
     else {
-      console.log(notes[currentNote] + "# off");
+      //console.log(notes[currentNote] + "# off");
       client.renderer.animateKeys(currentNote, false)
     }
+    sendMsg(7, 0, [currentNote + midiG1, 127, 0])
   }
   noteOnRecieved == false
 }

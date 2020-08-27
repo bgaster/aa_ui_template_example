@@ -28,7 +28,7 @@ fs.writeFileSync('index.html', cleanup(`
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${id}</title>
-    <script src = "/js/support.js"></script>
+    <script src = "../js/support.js"></script>
     <script>
     </script>
   </head>
@@ -39,6 +39,9 @@ fs.writeFileSync('index.html', cleanup(`
       const client = new Client()
       client.install(document.body)
       window.addEventListener('load', () => { 
+        console.log = console.error = (str) => {
+          sendMsg(console_msg, 0, str);
+        }
         client.start()
       })
     </script>
