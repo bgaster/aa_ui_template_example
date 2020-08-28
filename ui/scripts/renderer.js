@@ -136,24 +136,31 @@ function Renderer (client) {
     this.setParams = function(param, value) {
       if (param == 0) {
         this.waveform = value
+        sendWaveform(value)
       }
       if (param == 1) {
         this.attack = value
+        sendAttack(value)
       }
       if (param == 2) {
         this.decay = value
+        sendDecay(value)
       }
       if (param == 3) {
         this.sustain = value
+        sendSustain(value)
       }
       if (param == 4) {
         this.release = value
+        sendRelease(value)
       }
       if (param == 5) {
         this.vibrato = value
+        sendVibrato(value)
       }
       if (param == 6) {
         this.tremelo = value
+        sendTremelo(value)
       }
       if (param == 7) {
         this.tempo = value
