@@ -348,23 +348,74 @@ function Renderer (client) {
           this.context.stroke();
         }
 
-        this.context.beginPath()
-        this.context.fillRect(1020, 45, 40, 20);
-        this.context.moveTo(1020, 45+20);
-        this.context.lineTo(1060, 45+20);
-        this.context.lineTo(1060, 45+1);
-        this.context.fillRect(1080, 45, 40, 20);
-        this.context.moveTo(1080, 45+20);
-        this.context.lineTo(1120, 45+20);
-        this.context.lineTo(1120, 45+1);
-        this.context.stroke();
+        //this.context.beginPath()
+        //this.context.fillRect(1020, 45, 40, 20);
+        //this.context.moveTo(1020, 45+20);
+        //this.context.lineTo(1060, 45+20);
+        //this.context.lineTo(1060, 45+1);
+        //this.context.fillRect(1080, 45, 40, 20);
+        //this.context.moveTo(1080, 45+20);
+        //this.context.lineTo(1120, 45+20);
+        //this.context.lineTo(1120, 45+1);
+        //this.context.stroke();
+        //this.context.beginPath();
+        //this.context.moveTo(1020 + 15, 55);
+        //this.context.lineTo(1020 + 25, 55);
+        //this.context.moveTo(1085 + 15, 50);
+        //this.context.lineTo(1085 + 15, 60);
+        //this.context.moveTo(1080 + 15, 55);
+        //this.context.lineTo(1080 + 25, 55);
+
         this.context.beginPath();
-        this.context.moveTo(1020 + 15, 55);
-        this.context.lineTo(1020 + 25, 55);
-        this.context.moveTo(1085 + 15, 50);
-        this.context.lineTo(1085 + 15, 60);
-        this.context.moveTo(1080 + 15, 55);
-        this.context.lineTo(1080 + 25, 55);
+        this.context.lineWidth = 7
+        this.context.strokeStyle = black
+        this.context.moveTo(1000, 55);
+        this.context.lineTo(1120, 55);
+        this.context.stroke();
+        if (octave == 1) {
+          this.context.beginPath()
+          this.context.fillStyle = shadow
+          this.context.fillRect(1045, 45, 30, 20)
+          this.context.lineWidth = 1
+          this.context.strokeStyle = black
+          this.context.moveTo(1045+15, 46)
+          this.context.lineTo(1045+15, 64)
+          this.context.moveTo(1045+10, 46)
+          this.context.lineTo(1045+10, 64)
+          this.context.moveTo(1045+20, 46)
+          this.context.lineTo(1045+20, 64)
+          this.context.stroke()
+        }
+        if (octave == 0) {
+          this.context.beginPath()
+          this.context.fillStyle = shadow
+          this.context.fillRect(1000, 45, 30, 20)
+          this.context.lineWidth = 1
+          this.context.strokeStyle = black
+          this.context.moveTo(1000+15, 46)
+          this.context.lineTo(1000+15, 64)
+          this.context.moveTo(1000+10, 46)
+          this.context.lineTo(1000+10, 64)
+          this.context.moveTo(1000+20, 46)
+          this.context.lineTo(1000+20, 64)
+          this.context.stroke()
+        }
+
+        if (octave == 2) {
+          this.context.beginPath()
+          this.context.fillStyle = shadow
+          this.context.fillRect(1090, 45, 30, 20)
+          this.context.lineWidth = 1
+          this.context.strokeStyle = black
+          this.context.moveTo(1090+15, 46)
+          this.context.lineTo(1090+15, 64)
+          this.context.moveTo(1090+10, 46)
+          this.context.lineTo(1090+10, 64)
+          this.context.moveTo(1090+20, 46)
+          this.context.lineTo(1090+20, 64)
+          this.context.stroke()
+        }
+
 
 
         // Interface text
@@ -384,7 +435,10 @@ function Renderer (client) {
         this.context.fillText("Violin", 732, 80);
         this.context.fillText("Flute", 803, 80);
         this.context.fillText("Guitar", 871, 80);
-        this.context.fillText("Octave", 1052, 80);
+        this.context.fillText("Octave", 1043, 38);
+        this.context.fillText("Low", 997, 80);
+        this.context.fillText("Middle", 1045, 80);
+        this.context.fillText("High", 1103, 80);
         this.context.stroke();
 
 

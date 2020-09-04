@@ -251,20 +251,26 @@ buttonPresses = function(e, client) {
     client.renderer.setParams(6, tremelo)
     noteOnRecieved = false
   }
-  if (e.clientX >= 1028 && e.clientY >= 53 && e.clientX <= 1028 + 40 && e.clientY <= 53 + 20) {
-    if (octave > 0) {
-      octave = octave - 1
-      console.log("- Octave")
-      console.log(octave)
+  if (e.clientX >= 1000 && e.clientY >= 53 && e.clientX <= 1000 + 40 && e.clientY <= 53 + 20) {
+    if (octave != 0) {
+      octave = 0
+      console.log("Octave = 0")
       client.renderer.setParams(8, octave)
     }
     noteOnRecieved = false
   }
-  if (e.clientX >= 1088 && e.clientY >= 53 && e.clientX <= 1088 + 40 && e.clientY <= 53 + 20) {
-    if (octave < 2) {
-      octave = octave + 1
-      console.log("+ Octave")
-      console.log(octave)
+  if (e.clientX >= 1041 && e.clientY >= 53 && e.clientX <= 1041 + 40 && e.clientY <= 53 + 20) {
+    if (octave != 1) {
+      octave = 1
+      console.log("Octave = 1")
+      client.renderer.setParams(8, octave)
+    }
+    noteOnRecieved = false
+  }
+  if (e.clientX >= 1081 && e.clientY >= 53 && e.clientX <= 1081 + 40 && e.clientY <= 53 + 20) {
+    if (octave != 2) {
+      octave = 2
+      console.log("Octave = 2")
       client.renderer.setParams(8, octave)
     }
     noteOnRecieved = false
